@@ -506,6 +506,15 @@ LOCAL_CFLAGS += \
 LOCAL_CONLY_FLAGS := \
     -std=c99 \
 
+ifeq ($(USE_EXODUS_BIONIC_OPTS),true)
+  libm_common_cflags := \
+    -O3 \
+    $(DEBUG_SYMBOL_FLAGS) \
+    $(DEBUG_FRAME_POINTER_FLAGS)
+endif
+
+LOCAL_CFLAGS += $(libm_common_cflags)
+
 LOCAL_NATIVE_COVERAGE := $(bionic_coverage)
 LOCAL_ADDRESS_SANITIZER := false
 include $(BUILD_STATIC_LIBRARY)
@@ -523,6 +532,7 @@ LOCAL_LDFLAGS_x86 := -Wl,--hash-style=both
 
 LOCAL_LDFLAGS := -Wl,--version-script,$(LOCAL_PATH)/libm.map
 
+LOCAL_CFLAGS += $(libm_common_cflags)
 LOCAL_MODULE := libm
 LOCAL_CLANG := $(libm_clang)
 LOCAL_SYSTEM_SHARED_LIBRARIES := libc

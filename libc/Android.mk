@@ -575,6 +575,13 @@ libc_common_cflags := \
     -D_LIBC=1 \
     -Wall -Wextra -Wunused \
 
+ifeq ($(USE_EXODUS_BIONIC_OPTS),true)
+  libc_common_cflags += \
+    -O3 \
+    $(DEBUG_SYMBOL_FLAGS) \
+    $(DEBUG_FRAME_POINTER_FLAGS)
+endif
+
 ifneq ($(TARGET_USES_LOGD),false)
 libc_common_cflags += -DTARGET_USES_LOGD
 endif
