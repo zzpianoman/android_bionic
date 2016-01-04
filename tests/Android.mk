@@ -20,6 +20,9 @@ LOCAL_PATH := $(call my-dir)
 # Unit tests.
 # -----------------------------------------------------------------------------
 
+# To save on compilation time we don't always build these.  configure in /build/core/exodus_config.mk.
+ifeq ($(BUILD_PLATFORM_TESTS),true)
+
 ifeq ($(HOST_OS)-$(HOST_ARCH),$(filter $(HOST_OS)-$(HOST_ARCH),linux-x86 linux-x86_64))
 build_host := true
 else
@@ -481,3 +484,6 @@ endif # x86 x86_64
 endif # linux-x86
 
 include $(call first-makefiles-under,$(LOCAL_PATH))
+
+# BUILD_PLATFORM_TESTS
+endif
