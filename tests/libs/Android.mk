@@ -17,6 +17,8 @@
 LOCAL_PATH := $(call my-dir)
 TEST_PATH := $(LOCAL_PATH)/..
 
+ifeq ($(BUILD_PLATFORM_TESTS),true)
+
 common_cppflags += -std=gnu++11
 common_additional_dependencies := \
     $(LOCAL_PATH)/Android.mk \
@@ -444,3 +446,5 @@ libtest_dlopen_from_ctor_main_shared_libraries := libtest_dlopen_from_ctor
 
 module := libtest_dlopen_from_ctor_main
 include $(LOCAL_PATH)/Android.build.testlib.mk
+
+endif
